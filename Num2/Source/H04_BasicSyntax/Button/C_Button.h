@@ -12,7 +12,7 @@ class H04_BASICSYNTAX_API AC_Button : public AActor
 public:	
 	AC_Button();
 
-private:
+protected:
 	UPROPERTY(VisibleDefaultsOnly)
 		class USceneComponent* Root;
 
@@ -22,4 +22,6 @@ private:
 	UPROPERTY(VisibleDefaultsOnly)
 		class UBoxComponent* BoxCollision;
 
+	UPROPERTY(VisibleDefaultsOnly)
+		class UMaterialInstanceConstant* Material;
 };

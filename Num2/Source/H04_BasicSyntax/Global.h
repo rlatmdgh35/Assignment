@@ -10,8 +10,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/KismetMathLibrary.h"
 
+#include "Materials/MaterialInstanceConstant.h"
 
 #include "Utilities/C_Log.h"
 #include "Utilities/C_Helpers.h"
-
-#include "Materials/MaterialInstanceConstant.h"
