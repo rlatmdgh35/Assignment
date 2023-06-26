@@ -24,7 +24,5 @@ void UC_AnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 
 	Speed = Player->GetVelocity().Size2D();
 
-
-
 	// TryGetPawnOwener();
 }

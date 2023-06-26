@@ -15,4 +15,8 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+protected:
+	UPROPERTY(VisibleDefaultsOnly)
+		class UStaticMeshComponent* StaticMesh;
+
 };
