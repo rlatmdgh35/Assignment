@@ -1,6 +1,6 @@
 #include "C_Button_Green.h"
 #include "Global.h"
-
+#include "GameFramework/Character.h"
 
 AC_Button_Green::AC_Button_Green()
 {
@@ -9,3 +9,27 @@ AC_Button_Green::AC_Button_Green()
 	Cylinder->SetMaterial(0, Material);
 }
 
+void AC_Button_Green::BeginPlay()
+{
+	OnActorBeginOverlap.AddDynamic(this, &AC_Button_Green::BeginOverlap);
+	OnActorEndOverlap.AddDynamic(this, &AC_Button_Green::EndOverlap);
+}
+
+void AC_Button_Green::BeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
+{
+	ACharacter* OtherCharacter = Cast<ACharacter>(OtherActor);
+	CheckNull(OtherCharacter);
+
+	if (OnBeginOverlap.IsBound())
+		OnBeginOverlap.Execute();
+
+}
+
+void AC_Button_Green::EndOverlap(AActor* OverlappedActor, AActor* OtherActor)
+{
+	ACharacter* OtherCharacter = Cast<ACharacter>(OtherActor);
+	CheckNull(OtherCharacter);
+
+	if (OnEndOverlap.IsBound())
+		OnEndOverlap.Execute();
+}
