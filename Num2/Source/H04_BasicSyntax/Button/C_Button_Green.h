@@ -7,7 +7,6 @@
 DECLARE_DELEGATE(FBoxBeginOverlap);
 DECLARE_DELEGATE(FBoxEndOverlap);
 
-
 UCLASS()
 class H04_BASICSYNTAX_API AC_Button_Green : public AC_Button
 {

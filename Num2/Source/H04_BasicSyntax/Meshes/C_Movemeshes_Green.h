@@ -19,19 +19,12 @@ protected:
 public:
 	virtual void Tick(float DeltaTime) override;
 
-public:
-	FORCEINLINE float IsOverlap() { return bMove; }
-
-
 private:
 	UFUNCTION()
 		void BeginOverlap();
-
 	UFUNCTION()
 		void EndOverlap();
 
-	bool bMove;
-
-	float MoveValue(float DeltaTime, float FinishTime, float Length);
-
+public:
+	FORCEINLINE float IsOverlap() { return bMove; }
 };

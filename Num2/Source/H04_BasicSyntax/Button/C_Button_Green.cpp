@@ -19,8 +19,10 @@ void AC_Button_Green::BeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
 	ACharacter* OtherCharacter = Cast<ACharacter>(OtherActor);
 	CheckNull(OtherCharacter);
+	C_Log::Print("BeginOverlap");
 
 	if (OnBeginOverlap.IsBound())
+		C_Log::Print("BeginExecute");
 		OnBeginOverlap.Execute();
 
 }
@@ -29,7 +31,9 @@ void AC_Button_Green::EndOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
 	ACharacter* OtherCharacter = Cast<ACharacter>(OtherActor);
 	CheckNull(OtherCharacter);
+	C_Log::Print("EndOverlap");
 
 	if (OnEndOverlap.IsBound())
+		C_Log::Print("EndExecute");
 		OnEndOverlap.Execute();
 }
