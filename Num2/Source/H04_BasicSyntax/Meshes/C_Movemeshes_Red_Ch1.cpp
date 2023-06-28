@@ -8,3 +8,7 @@ AC_Movemeshes_Red_Ch1::AC_Movemeshes_Red_Ch1()
 
 }
 
+void AC_Movemeshes_Red_Ch1::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+}

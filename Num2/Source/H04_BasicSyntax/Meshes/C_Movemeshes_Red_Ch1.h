@@ -13,6 +13,8 @@ class H04_BASICSYNTAX_API AC_Movemeshes_Red_Ch1 : public AC_Movemeshes_Red
 public:
 	AC_Movemeshes_Red_Ch1();
 	
+public:
+	virtual void Tick(float DeltaTime) override;
 
 
 

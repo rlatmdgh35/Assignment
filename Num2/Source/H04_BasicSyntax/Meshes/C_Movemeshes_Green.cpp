@@ -26,17 +26,36 @@ AC_Movemeshes_Green::AC_Movemeshes_Green()
 
 }
 
+void AC_Movemeshes_Green::BeginPlay()
+{
+	Super::BeginPlay();
+
+	TArray<AActor*> actors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AC_Button_Green::StaticClass(), actors);
+	CheckFalse(actors.Num() > 0);
+
+
+	AC_Button_Green* button = Cast<AC_Button_Green>(actors[0]);
+	CheckNull(button);
+
+	button->OnBeginOverlap.BindUFunction(this, "BeginOverlap");
+	button->OnEndOverlap.BindUFunction(this, "EndOverlap");
+}
+
+
 void AC_Movemeshes_Green::BeginOverlap()
 {
-	IsMove = true;
+	bMove = true;
 	C_Log::Print("True");
 }
 
 void AC_Movemeshes_Green::EndOverlap()
 {
-	IsMove = false;
+	bMove = false;
 	C_Log::Print("False");
 }
+
+
 
 float AC_Movemeshes_Green::MoveValue(float DeltaTime, float FinishTime, float Length)
 {
@@ -45,7 +64,7 @@ float AC_Movemeshes_Green::MoveValue(float DeltaTime, float FinishTime, float Le
 	float result;
 	float checkdirection;
 	float length = Length;
-	float Return;
+	float ReturnValue;
 	bool bForward;
 
 	
@@ -60,29 +79,27 @@ float AC_Movemeshes_Green::MoveValue(float DeltaTime, float FinishTime, float Le
 
 
 	if (bForward)
-		Return = result * length / finishTime;
+		ReturnValue = result * length / finishTime;
 	else
-		Return = length * (1 - result / finishTime);
+		ReturnValue = length * (1 - result / finishTime);
+	
 
-
-	return Return;
+	return ReturnValue;
 }
 
 void AC_Movemeshes_Green::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	float Location_X;
-	float Location_Z;
+	FVector location = GetActorLocation();
 	FHitResult hitresult;
 
-	if (IsMove)
+
+	if (IsOverlap())
 	{
-		Location_X = MoveValue(DeltaTime, 3, 350);
-		Location_Z = MoveValue(DeltaTime, 3, 180);
+		C_Log::Print("IsMove");
+		location.Z = MoveValue(DeltaTime, 3, 170);
 	}
 	
-	K2_SetActorRelativeLocation(FVector(Location_X, 0, Location_Z), false, hitresult, false);
-
-
+	K2_SetActorRelativeLocation(location, false, hitresult, false);
 }

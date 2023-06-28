@@ -14,3 +14,8 @@ void AC_Movemeshes_Red::BeginPlay()
 {
 	Super::BeginPlay();
 }
+
+void AC_Movemeshes_Red::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+}

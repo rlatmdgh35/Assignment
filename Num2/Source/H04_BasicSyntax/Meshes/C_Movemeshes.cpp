@@ -5,6 +5,8 @@
 
 AC_Movemeshes::AC_Movemeshes()
 {
+	PrimaryActorTick.bCanEverTick = true;
+
 	C_Helpers::CreateSceneComponent<UStaticMeshComponent>(this, &StaticMesh, "StaticMesh");
 	UStaticMesh* staticMesh;
 	C_Helpers::GetAsset<UStaticMesh>(&staticMesh, "StaticMesh'/Game/StaticMesh/StaticMeshes/SM_Cube.SM_Cube'");
@@ -14,4 +16,10 @@ AC_Movemeshes::AC_Movemeshes()
 void AC_Movemeshes::BeginPlay()
 {
 	Super::BeginPlay();
+}
+
+void AC_Movemeshes::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	
 }

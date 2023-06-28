@@ -13,8 +13,15 @@ class H04_BASICSYNTAX_API AC_Movemeshes_Green : public AC_Movemeshes
 public:
 	AC_Movemeshes_Green();
 
+protected:
+	virtual void BeginPlay() override;
+
 public:
 	virtual void Tick(float DeltaTime) override;
+
+public:
+	FORCEINLINE float IsOverlap() { return bMove; }
+
 
 private:
 	UFUNCTION()
@@ -23,10 +30,8 @@ private:
 	UFUNCTION()
 		void EndOverlap();
 
-	bool IsMove;
+	bool bMove;
 
 	float MoveValue(float DeltaTime, float FinishTime, float Length);
-
-
 
 };
