@@ -4,8 +4,11 @@
 #include "Button/C_Button.h"
 #include "C_Button_Red.generated.h"
 
-DECLARE_DELEGATE(FBoxBeginOverlap);
-DECLARE_DELEGATE(FBoxEndOverlap);
+DECLARE_DELEGATE(FCharacterBeginOverlap);
+DECLARE_DELEGATE(FCharacterEndOverlap);
+
+DECLARE_DELEGATE(FStaticMeshBeginOverlap);
+DECLARE_DELEGATE(FStaticMeshEndOverlap);
 
 UCLASS()
 class H04_BASICSYNTAX_API AC_Button_Red : public AC_Button
@@ -16,8 +19,11 @@ public:
 	AC_Button_Red();
 
 public:
-	FBoxBeginOverlap OnBeginOverlap;
-	FBoxEndOverlap OnEndOverlap;
+	FCharacterBeginOverlap ActorBeginOverlap;
+	FCharacterEndOverlap ActorEndOverlap;
+
+	FStaticMeshBeginOverlap StaticMeshBeginOverlap;
+	FStaticMeshEndOverlap StaticMeshEndOverlap;
 
 
 public:
@@ -28,6 +34,17 @@ private:
 		void BeginOverlap(AActor* OverlappedActor, AActor* OtherActor);
 	UFUNCTION()
 		void EndOverlap(AActor* OverlappedActor, AActor* OtherActor);
+
+public:
+	class ACharacter* OtherCharacter;
+	class AC_Movemeshes_Blue* OtherMesh;
+
+
+private:
+	void CharacterBeginOverlap();
+	void CharacterEndOverlap();
+	void MeshBeginOverlap();
+	void MeshEndOverlap();
 
 
 };

@@ -1,6 +1,6 @@
 #include "C_Movemeshes_Red_Ch1.h"
-#include "Global.h"
 #include "Button/C_Button_Red.h"
+#include "Global.h"
 
 AC_Movemeshes_Red_Ch1::AC_Movemeshes_Red_Ch1()
 {
@@ -12,8 +12,18 @@ void AC_Movemeshes_Red_Ch1::BeginPlay()
 {
 	Super::BeginPlay();
 
-	OnActorBeginOverlap.AddDynamic(this, &AC_Movemeshes_Red_Ch1::BeginOverlap);
-	OnActorEndOverlap.AddDynamic(this, &AC_Movemeshes_Red_Ch1::EndOverlap);
+	TArray<AActor*> actor;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AC_Button_Red::StaticClass(), actor);
+	CheckFalse(actor.Num() > 0);
+
+	AC_Button_Red* button = Cast<AC_Button_Red>(actor[0]);
+	CheckNull(button);
+
+	button->ActorBeginOverlap.BindUFunction(this, "BeginOverlap");
+	button->ActorEndOverlap.BindUFunction(this, "EndOverlap");
+
+
+
 
 }
 
@@ -34,7 +44,6 @@ void AC_Movemeshes_Red_Ch1::Tick(float DeltaTime)
 
 	if (IsOverlap())
 	{
-		FHitResult hitresult;
 		Location.X = MoveValue(GetWorld()->GetDeltaSeconds(), 3.f, 350.f);
 		Location.Z = MoveValue(GetWorld()->GetDeltaSeconds(), 3.f, 200.f);
 	}

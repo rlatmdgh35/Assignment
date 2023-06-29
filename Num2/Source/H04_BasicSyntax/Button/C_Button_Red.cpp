@@ -1,6 +1,7 @@
 #include "C_Button_Red.h"
+#include "Meshes/C_Movemeshes_Blue.h"
 #include "Global.h"
-#include "Meshes/C_Movemeshes.h"
+#include "GameFramework/Character.h"
 
 AC_Button_Red::AC_Button_Red()
 {
@@ -16,24 +17,64 @@ void AC_Button_Red::BeginPlay()
 	OnActorBeginOverlap.AddDynamic(this, &AC_Button_Red::BeginOverlap);
 	OnActorEndOverlap.AddDynamic(this, &AC_Button_Red::EndOverlap);
 
-
+	
 
 }
 
 void AC_Button_Red::BeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
-	ACharacter* otherCharacter = Cast<ACharacter>(OtherActor);
-	CheckNull(otherCharacter);
+	OtherCharacter = Cast<ACharacter>(OtherActor);
+	OtherMesh = Cast<AC_Movemeshes_Blue>(OtherActor);
 
-	if (OnBeginOverlap.IsBound())
-		OnBeginOverlap.Execute();
+	if (!!OtherCharacter)
+		CharacterBeginOverlap();
+
+	else if (!!OtherMesh)
+		MeshBeginOverlap();
+
+	else
+		C_Log::Print("else");
+
+
 }
 
 void AC_Button_Red::EndOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
-	ACharacter* otherCharacter = Cast<ACharacter>(OtherActor);
-	CheckNull(otherCharacter);
+	OtherCharacter = Cast<ACharacter>(OtherActor);
+	OtherMesh = Cast<AC_Movemeshes_Blue>(OtherActor);
 
-	if (OnEndOverlap.IsBound())
-		OnEndOverlap.Execute();
+
+	if (!!OtherCharacter)
+		CharacterEndOverlap();
+
+	else if (!!OtherMesh)
+		MeshEndOverlap();
+
+	else
+		C_Log::Print("else");
+}
+
+void AC_Button_Red::CharacterBeginOverlap()
+{
+	if (ActorBeginOverlap.IsBound())
+		ActorBeginOverlap.Execute();
+}
+
+void AC_Button_Red::CharacterEndOverlap()
+{
+	if (ActorEndOverlap.IsBound())
+		ActorEndOverlap.Execute();
+}
+
+void AC_Button_Red::MeshBeginOverlap()
+{
+	if (StaticMeshBeginOverlap.IsBound())
+		StaticMeshBeginOverlap.Execute();
+
+}
+
+void AC_Button_Red::MeshEndOverlap()
+{
+	if (StaticMeshEndOverlap.IsBound())
+		StaticMeshEndOverlap.Execute();
 }

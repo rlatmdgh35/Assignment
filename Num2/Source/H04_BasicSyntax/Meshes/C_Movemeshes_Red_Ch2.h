@@ -13,7 +13,20 @@ class H04_BASICSYNTAX_API AC_Movemeshes_Red_Ch2 : public AC_Movemeshes_Red
 public:
 	AC_Movemeshes_Red_Ch2();
 
+protected:
+	virtual void BeginPlay() override;
+
 public:
 	virtual void Tick(float DeltaTime) override;
+
+private:
+	UFUNCTION()
+		void BeginOverlap();
+	UFUNCTION()
+		void EndOverlap();
+
+
+public:
+	FORCEINLINE bool IsOverlap() { return bMove; }
 	
 };
