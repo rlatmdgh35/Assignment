@@ -25,6 +25,7 @@ private:
 	UFUNCTION()
 		void EndOverlap();
 
+
 public:
 	FORCEINLINE float IsOverlap() { return bMove; }
 };

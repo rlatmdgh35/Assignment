@@ -44,7 +44,8 @@ void AC_Movemeshes_Green::BeginPlay()
 void AC_Movemeshes_Green::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	
+	
 	if (true)
 	{
 		FHitResult hitresult;
