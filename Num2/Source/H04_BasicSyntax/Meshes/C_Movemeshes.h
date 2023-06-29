@@ -2,7 +2,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Global.h"
 #include "C_Movemeshes.generated.h"
 
 UCLASS()

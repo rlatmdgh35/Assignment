@@ -27,5 +27,5 @@ private:
 
 
 public:
-	FORCEINLINE float IsOverlap() { return bMove; }
+	FORCEINLINE bool IsOverlap() { return bMove; }
 };
