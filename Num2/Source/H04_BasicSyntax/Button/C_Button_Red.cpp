@@ -1,6 +1,6 @@
 #include "C_Button_Red.h"
 #include "Global.h"
-#include "Meshes/C_Movemeshes.h"
+#include "GameFramework/Character.h"
 
 AC_Button_Red::AC_Button_Red()
 {
@@ -16,7 +16,7 @@ void AC_Button_Red::BeginPlay()
 	OnActorBeginOverlap.AddDynamic(this, &AC_Button_Red::BeginOverlap);
 	OnActorEndOverlap.AddDynamic(this, &AC_Button_Red::EndOverlap);
 
-
+	
 
 }
 
@@ -25,8 +25,9 @@ void AC_Button_Red::BeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
 	ACharacter* otherCharacter = Cast<ACharacter>(OtherActor);
 	CheckNull(otherCharacter);
 
-	if (OnBeginOverlap.IsBound())
-		OnBeginOverlap.Execute();
+
+	if (ActorBeginOverlap.IsBound())
+		ActorBeginOverlap.Execute();
 }
 
 void AC_Button_Red::EndOverlap(AActor* OverlappedActor, AActor* OtherActor)
@@ -34,6 +35,6 @@ void AC_Button_Red::EndOverlap(AActor* OverlappedActor, AActor* OtherActor)
 	ACharacter* otherCharacter = Cast<ACharacter>(OtherActor);
 	CheckNull(otherCharacter);
 
-	if (OnEndOverlap.IsBound())
-		OnEndOverlap.Execute();
+	if (ActorEndOverlap.IsBound())
+		ActorEndOverlap.Execute();
 }

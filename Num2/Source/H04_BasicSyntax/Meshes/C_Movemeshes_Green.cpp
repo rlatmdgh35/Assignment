@@ -12,6 +12,21 @@ AC_Movemeshes_Green::AC_Movemeshes_Green()
 	CheckNull(material);
 	StaticMesh->SetMaterial(0, material);
 	StaticMesh->SetRelativeScale3D(FVector(1.5f, 3.f, 0.1f));
+}
+
+void AC_Movemeshes_Green::BeginOverlap()
+{
+	bMove = true;
+}
+
+void AC_Movemeshes_Green::EndOverlap()
+{
+	bMove = false;
+}
+
+void AC_Movemeshes_Green::BeginPlay()
+{
+	Super::BeginPlay();
 
 	TArray<AActor*> actors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AC_Button_Green::StaticClass(), actors);
@@ -22,23 +37,6 @@ AC_Movemeshes_Green::AC_Movemeshes_Green()
 
 	button->OnBeginOverlap.BindUFunction(this, "BeginOverlap");
 	button->OnEndOverlap.BindUFunction(this, "EndOverlap");
-}
-
-void AC_Movemeshes_Green::BeginOverlap()
-{
-	C_Log::Print("True");
-	bMove = true;
-}
-
-void AC_Movemeshes_Green::EndOverlap()
-{
-	C_Log::Print("False");
-	bMove = false;
-}
-
-void AC_Movemeshes_Green::BeginPlay()
-{
-	Super::BeginPlay();
 }
 
 void AC_Movemeshes_Green::Tick(float DeltaTime)
