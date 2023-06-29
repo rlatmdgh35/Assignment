@@ -13,9 +13,27 @@ void AC_Button_Red::BeginPlay()
 {
 	Super::BeginPlay();
 
+	OnActorBeginOverlap.AddDynamic(this, &AC_Button_Red::BeginOverlap);
+	OnActorEndOverlap.AddDynamic(this, &AC_Button_Red::EndOverlap);
 
 
 
+}
 
+void AC_Button_Red::BeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
+{
+	ACharacter* otherCharacter = Cast<ACharacter>(OtherActor);
+	CheckNull(otherCharacter);
 
+	if (OnBeginOverlap.IsBound())
+		OnBeginOverlap.Execute();
+}
+
+void AC_Button_Red::EndOverlap(AActor* OverlappedActor, AActor* OtherActor)
+{
+	ACharacter* otherCharacter = Cast<ACharacter>(OtherActor);
+	CheckNull(otherCharacter);
+
+	if (OnEndOverlap.IsBound())
+		OnEndOverlap.Execute();
 }

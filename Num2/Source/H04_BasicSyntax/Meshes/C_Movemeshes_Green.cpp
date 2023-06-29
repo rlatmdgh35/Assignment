@@ -45,7 +45,7 @@ void AC_Movemeshes_Green::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (true)
+	if (IsOverlap())
 	{
 		FHitResult hitresult;
 		Location.Z = MoveValue(GetWorld()->GetDeltaSeconds(), 3.f, 170.f);
