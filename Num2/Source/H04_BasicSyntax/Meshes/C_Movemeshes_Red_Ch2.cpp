@@ -26,6 +26,8 @@ void AC_Movemeshes_Red_Ch2::BeginPlay()
 
 void AC_Movemeshes_Red_Ch2::BeginOverlap()
 {
+	CheckLife = 0;
+
 	bMove = true;
 }
 
@@ -41,9 +43,8 @@ void AC_Movemeshes_Red_Ch2::Tick(float DeltaTime)
 
 	if (IsOverlap())
 	{
-		float checkLife = GetWorld()->GetDeltaSeconds();
-		checkLife += checkLife;
-		if (checkLife < 13.f)
+		CheckLife += GetWorld()->GetDeltaSeconds();
+		if (CheckLife < 13.f)
 		{
 			Location.Z = MoveValue(GetWorld()->GetDeltaSeconds(), 6.5f, -650.f);
 			SetActorLocation(StartActorLocation + Location);
