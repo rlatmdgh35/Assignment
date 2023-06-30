@@ -51,7 +51,7 @@ void AC_Movemeshes_Blue::Reset()
 	if (bMove == false)
 	{
 		StaticMesh->SetSimulatePhysics(false);
-		SetActorLocation(FVector(-350.f, -350.f, 500));
+		SetActorLocationAndRotation(FVector(-350.f, -350.f, 500), FRotator::ZeroRotator);
 		DeltaSeconds = 0;
 	}
 	bMove = true;
